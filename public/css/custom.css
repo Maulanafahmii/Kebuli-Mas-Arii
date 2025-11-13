@@ -1,0 +1,39 @@
+
+.menu-image {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.action-buttons .btn {
+    margin: 0;
+}
+
+@media (max-width: 767px) {
+    .row > div {
+        margin-bottom: 10px;
+    }
+}
+
+.alert-dismissible .close {
+    padding: 0.75rem 1.25rem;
+}
+.menu-porsi {
+    width: 100px;
+}
+
+.subtotal {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.action-buttons .btn {
+    margin-right: 5px;
+}
