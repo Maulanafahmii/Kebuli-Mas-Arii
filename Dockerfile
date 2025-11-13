@@ -1,32 +1,23 @@
-# Gunakan base image PHP + Composer + Node.js
-FROM php:8.2-fpm
-
-# Install dependencies yang dibutuhkan Laravel
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    zip \
-    unzip \
-    nodejs \
-    npm
+# Gunakan image yang sudah ada PHP + Composer + Node.js
+FROM richarvey/nginx-php-fpm:latest
 
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy semua file ke container
+# Copy semua file project
 COPY . .
 
-# Install composer dependencies
+# Install dependencies Laravel
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-# Install npm dependencies dan build aset Vite
+# Install dependencies npm untuk Vite dan build aset
 RUN npm install && npm run build
 
-# Generate application key
+# Generate app key Laravel
 RUN php artisan key:generate
 
-# Expose port untuk Laravel
+# Expose port default Laravel
 EXPOSE 8000
 
 # Jalankan Laravel
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+CMD php artisan serve --host=0.0.0.0 --port=8000
