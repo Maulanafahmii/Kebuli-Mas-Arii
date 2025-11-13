@@ -40,6 +40,9 @@ COPY --from=build /app/public/build ./public/build
 # Install dependency backend (Laravel)
 RUN composer install --no-dev --optimize-autoloader
 
+# Copy .env.example jadi .env agar artisan bisa dijalankan
+RUN cp .env.example .env
+
 # Generate app key
 RUN php artisan key:generate
 
@@ -48,3 +51,4 @@ EXPOSE 8000
 
 # Jalankan Laravel server
 CMD php artisan serve --host=0.0.0.0 --port=8000
+
